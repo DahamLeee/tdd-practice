@@ -7,11 +7,10 @@ public class StringAddCalculator {
 
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_REGEXP = "//(.)\n(.*)";
-    private static final int ZERO = 0;
 
     public static int splitAndSum(String text) {
         if (isBlank(text)) {
-            return ZERO;
+            return 0;
         }
 
         return totalSum(splitText(text));

@@ -6,6 +6,10 @@ public class PositiveInteger {
 
     private PositiveInteger() { }
 
+    private PositiveInteger(String number) {
+        this(Integer.parseInt(number));
+    }
+
     private PositiveInteger(int number) {
         validateNumber(number);
         this.number = number;
@@ -16,7 +20,7 @@ public class PositiveInteger {
     }
 
     public static PositiveInteger from(String number) {
-        return new PositiveInteger(Integer.parseInt(number));
+        return new PositiveInteger(number);
     }
 
     private void validateNumber(int number) {
