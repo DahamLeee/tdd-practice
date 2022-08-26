@@ -3,6 +3,7 @@ package racingcar.domain;
 public class RacingCar {
 
     private static final int MOVABLE_BOUNDARY_NUMBER = 4;
+    private static final String DISTANCE_MARK = "-";
     private int distance;
 
     private RacingCar() { }
@@ -23,6 +24,10 @@ public class RacingCar {
         if (randomNumber >= MOVABLE_BOUNDARY_NUMBER) {
             distance++;
         }
+    }
+
+    public String distanceToString() {
+        return DISTANCE_MARK.repeat(Math.max(0, distance));
     }
 
     public int getDistance() {
