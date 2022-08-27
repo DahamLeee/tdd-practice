@@ -30,7 +30,7 @@ public class RacingCar {
         return DISTANCE_MARK.repeat(Math.max(0, distance));
     }
 
-    public int getDistance() {
+    public int distance() {
         return distance;
     }
 }

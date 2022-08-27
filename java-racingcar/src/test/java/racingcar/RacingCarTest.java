@@ -16,7 +16,7 @@ class RacingCarTest {
         RacingCar racingCar = RacingCar.create();
         racingCar.move(randomNumber);
 
-        assertThat(racingCar.getDistance()).isEqualTo(distance);
+        assertThat(racingCar.distance()).isEqualTo(distance);
     }
 
 }
