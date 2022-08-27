@@ -4,6 +4,7 @@ import racingcar.util.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.*;
 
@@ -36,5 +37,20 @@ public class RacingCars {
 
     public List<RacingCar> getRacingCars() {
         return unmodifiableList(racingCars);
+    }
+
+    public List<RacingCar> winnerOfTheRace() {
+        int longestDistance = findLongestDistance();
+
+        return racingCars.stream()
+                .filter(racingCar -> racingCar.distance() == longestDistance)
+                .collect(Collectors.toList());
+    }
+
+    private int findLongestDistance() {
+        return racingCars.stream()
+                .mapToInt(RacingCar::distance)
+                .max()
+                .orElseThrow(() -> new IllegalStateException("가장 긴 거리를 가지는 경주 차를 찾을 수 없습니다."));
     }
 }
