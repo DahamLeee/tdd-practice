@@ -1,25 +1,35 @@
 package racingcar.ui;
 
 import racingcar.domain.RacingCar;
+import racingcar.application.dto.RoundResult;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultView {
 
-    private final List<String> roundResults = new ArrayList<>();
+    private static final String DISTANCE_MARK = "-";
 
-    public void drawRoundDistance(List<RacingCar> racingCars) {
-        StringBuilder roundResultBuilder = new StringBuilder();
+    private final List<RoundResult> roundResults;
+    private final List<RacingCar> winners;
 
-        for (RacingCar racingCar : racingCars) {
-            roundResultBuilder.append(racingCar.distanceToString()).append("\n");
-        }
-        roundResults.add(roundResultBuilder.append("\n").toString());
+    public ResultView(List<RoundResult> roundResults, List<RacingCar> winners) {
+        this.roundResults = roundResults;
+        this.winners = winners;
     }
 
     public void raceResult() {
-        roundResults.forEach(System.out::println);
+        roundResults.forEach(roundResult -> {
+            roundResult.getRacingCarResponses().forEach(racingCarResponse -> {
+                System.out.printf("%s : %s \n", racingCarResponse.getRacingCarName(), printDistanceToMark(racingCarResponse.getDistance()));
+            });
+            System.out.println();
+        });
+
+        winners.forEach(winner -> System.out.printf(winner.carName() + " "));
+        System.out.println("가 최종 우승했습니다.");
     }
 
+    private String printDistanceToMark(int distance) {
+        return DISTANCE_MARK.repeat(Math.max(0, distance));
+    }
 }

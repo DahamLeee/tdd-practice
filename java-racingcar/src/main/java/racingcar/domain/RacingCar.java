@@ -3,12 +3,13 @@ package racingcar.domain;
 public class RacingCar {
 
     private static final int MOVABLE_BOUNDARY_NUMBER = 4;
-    private static final String DISTANCE_MARK = "-";
 
     private RacingCarName racingCarName;
     private int distance;
 
-    private RacingCar() { }
+    protected RacingCar() {
+        this(RacingCarName.from("base"), 0);
+    }
 
     private RacingCar(RacingCarName racingCarName) {
         this(racingCarName, 0);
@@ -17,10 +18,6 @@ public class RacingCar {
     private RacingCar(RacingCarName racingCarName, int distance) {
         this.racingCarName = racingCarName;
         this.distance = distance;
-    }
-
-    public static RacingCar create() {
-        return new RacingCar();
     }
 
     public static RacingCar from(RacingCarName racingCarName) {
@@ -37,8 +34,8 @@ public class RacingCar {
         }
     }
 
-    public String distanceToString() {
-        return DISTANCE_MARK.repeat(Math.max(0, distance));
+    public String carName() {
+        return racingCarName.racingCarName();
     }
 
     public int distance() {

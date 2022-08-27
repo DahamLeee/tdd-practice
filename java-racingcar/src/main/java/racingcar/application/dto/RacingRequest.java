@@ -1,17 +1,22 @@
 package racingcar.application.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Collections.*;
+
 public class RacingRequest {
 
-    private final int racingCarCount;
+    private final List<String> racingCarNames = new ArrayList<>();
     private final int moveCount;
 
-    public RacingRequest(int racingCarCount, int moveCount) {
-        this.racingCarCount = racingCarCount;
+    public RacingRequest(List<String> racingCarNames, int moveCount) {
+        this.racingCarNames.addAll(racingCarNames);
         this.moveCount = moveCount;
     }
 
-    public int getRacingCarCount() {
-        return racingCarCount;
+    public List<String> getRacingCarNames() {
+        return unmodifiableList(racingCarNames);
     }
 
     public int getMoveCount() {

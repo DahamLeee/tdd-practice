@@ -1,21 +1,42 @@
 package racingcar.application;
 
+import racingcar.application.dto.RacingCarResponse;
 import racingcar.application.dto.RacingRequest;
+import racingcar.application.dto.RoundResult;
+import racingcar.domain.RacingCar;
+import racingcar.domain.RacingCarName;
 import racingcar.domain.RacingCars;
-import racingcar.domain.RacingGame;
 import racingcar.ui.ResultView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class RacingGameService {
 
     public ResultView startRacingGame(RacingRequest racingRequest) {
-        RacingGame racingGame = new RacingGame(racingRequest.getRacingCarCount());
-        ResultView resultView = new ResultView();
+        List<RoundResult> roundResults = new ArrayList<>();
+        RacingCars racingCars = RacingCars.of(toRacingCars(racingRequest.getRacingCarNames()));
 
         for (int i = 0; i < racingRequest.getMoveCount(); i++) {
-            RacingCars racingCars = racingGame.raceStart();
-            resultView.drawRoundDistance(racingCars.getRacingCars());
+            roundResults.add(recordRoundResults(racingCars.move()));
         }
 
-        return resultView;
+        return new ResultView(roundResults, racingCars.winnerOfTheRace());
+    }
+
+    private List<RacingCar> toRacingCars(List<String> racingCarNames) {
+        return racingCarNames.stream()
+                .map(RacingCarName::from)
+                .map(RacingCar::from)
+                .collect(toList());
+    }
+
+    private RoundResult recordRoundResults(List<RacingCar> racingCars) {
+        return racingCars.stream()
+                .map(racingCar -> RacingCarResponse.of(racingCar.carName(), racingCar.distance()))
+                .collect(collectingAndThen(toList(), RoundResult::of));
     }
 }
