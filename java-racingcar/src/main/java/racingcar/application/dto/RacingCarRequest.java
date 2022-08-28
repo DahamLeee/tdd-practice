@@ -10,9 +10,17 @@ public class RacingCarRequest {
     private final List<String> racingCarNames = new ArrayList<>();
     private final int moveCount;
 
-    public RacingCarRequest(List<String> racingCarNames, int moveCount) {
+    private RacingCarRequest() {
+        this.moveCount = 0;
+    }
+
+    private RacingCarRequest(List<String> racingCarNames, int moveCount) {
         this.racingCarNames.addAll(racingCarNames);
         this.moveCount = moveCount;
+    }
+
+    public static RacingCarRequest of(List<String> racingCarNames, int moveCount) {
+        return new RacingCarRequest(racingCarNames, moveCount);
     }
 
     public List<String> getRacingCarNames() {

@@ -24,7 +24,7 @@ public class InputView {
 
         List<String> racingCarNames = splitCarNames(racingCarNameWithComma);
 
-        return new RacingCarRequest(racingCarNames, moveCount);
+        return RacingCarRequest.of(racingCarNames, moveCount);
     }
 
     private List<String> splitCarNames(String racingCarNameWithComma) {
