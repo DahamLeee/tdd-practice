@@ -1,7 +1,7 @@
 package racingcar.ui;
 
 import racingcar.application.RacingGameService;
-import racingcar.application.dto.RacingRequest;
+import racingcar.application.dto.RacingCarRequest;
 
 public class RacingCarApplication {
 
@@ -9,9 +9,9 @@ public class RacingCarApplication {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        RacingRequest racingRequest = inputView.createRacingRequest();
+        RacingCarRequest racingCarRequest = inputView.createRacingRequest();
 
-        ResultView resultView = racingGameService.startRacingGame(racingRequest);
+        ResultView resultView = racingGameService.startRacingGame(racingCarRequest);
         resultView.raceResult();
     }
 }

@@ -5,12 +5,12 @@ import java.util.List;
 
 import static java.util.Collections.*;
 
-public class RacingRequest {
+public class RacingCarRequest {
 
     private final List<String> racingCarNames = new ArrayList<>();
     private final int moveCount;
 
-    public RacingRequest(List<String> racingCarNames, int moveCount) {
+    public RacingCarRequest(List<String> racingCarNames, int moveCount) {
         this.racingCarNames.addAll(racingCarNames);
         this.moveCount = moveCount;
     }
