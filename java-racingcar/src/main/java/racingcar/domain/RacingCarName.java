@@ -5,7 +5,7 @@ public class RacingCarName {
     private static final int MAXIMUM_NAME_LENGTH = 5;
     private String racingCarName;
 
-    private RacingCarName() { }
+    protected RacingCarName() { }
 
     private RacingCarName(String racingCarName) {
         validateNameLength(racingCarName);

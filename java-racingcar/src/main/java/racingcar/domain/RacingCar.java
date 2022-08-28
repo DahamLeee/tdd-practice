@@ -4,18 +4,19 @@ public class RacingCar {
 
     private static final int MOVABLE_BOUNDARY_NUMBER = 4;
 
-    private RacingCarName racingCarName;
-    private int distance;
+    private final RacingCarName racingCarName;
+
+    private final Distance distance;
 
     protected RacingCar() {
-        this(RacingCarName.from("base"), 0);
+        this(RacingCarName.from("base"));
     }
 
     private RacingCar(RacingCarName racingCarName) {
-        this(racingCarName, 0);
+        this(racingCarName, Distance.from(0));
     }
 
-    private RacingCar(RacingCarName racingCarName, int distance) {
+    private RacingCar(RacingCarName racingCarName, Distance distance) {
         this.racingCarName = racingCarName;
         this.distance = distance;
     }
@@ -24,13 +25,13 @@ public class RacingCar {
         return new RacingCar(racingCarName);
     }
 
-    public static RacingCar of(RacingCarName racingCarName, int distance) {
+    public static RacingCar of(RacingCarName racingCarName, Distance distance) {
         return new RacingCar(racingCarName, distance);
     }
 
     public void move(int randomNumber) {
         if (randomNumber >= MOVABLE_BOUNDARY_NUMBER) {
-            distance++;
+            distance.goStraight();
         }
     }
 
@@ -39,6 +40,6 @@ public class RacingCar {
     }
 
     public int distance() {
-        return distance;
+        return distance.distance();
     }
 }

@@ -15,9 +15,9 @@ class RacingCarsTest {
     void winnerOfTheRacingCar() {
         RacingCars racingCars = RacingCars.of(
                 List.of(
-                        RacingCar.of(RacingCarName.from("a"), 3),
-                        RacingCar.of(RacingCarName.from("b"), 4),
-                        RacingCar.of(RacingCarName.from("c"), 5)));
+                        RacingCar.of(RacingCarName.from("a"), Distance.from(3)),
+                        RacingCar.of(RacingCarName.from("b"), Distance.from(4)),
+                        RacingCar.of(RacingCarName.from("c"), Distance.from(5))));
 
         List<RacingCar> winners = racingCars.winnerOfTheRace();
 
