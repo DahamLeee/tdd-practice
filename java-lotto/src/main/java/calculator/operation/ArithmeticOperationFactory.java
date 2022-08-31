@@ -18,6 +18,6 @@ public class ArithmeticOperationFactory {
         return operations.stream()
                 .filter(arithmeticOperation -> arithmeticOperation.support(operation))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("적절한 사칙연산이 들어오지 않았습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("적절한 사칙연산이 들어오지 않았습니다. 입력된 연산 %s", operation)));
     }
 }
