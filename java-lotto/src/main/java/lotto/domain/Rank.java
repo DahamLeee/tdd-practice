@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
 
@@ -26,5 +27,11 @@ public enum Rank {
                 .filter(rank -> rank.matchCount == matchedCount)
                 .findFirst()
                 .orElse(LOSER);
+    }
+
+    public static int totalWinnings(List<Rank> ranks) {
+        return ranks.stream()
+                .mapToInt(rank -> rank.winnings)
+                .sum();
     }
 }
