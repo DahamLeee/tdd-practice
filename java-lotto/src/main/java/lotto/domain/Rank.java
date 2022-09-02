@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
 
@@ -20,6 +21,12 @@ public enum Rank {
         this.winnings = winnings;
     }
 
+    public static List<Rank> calculateRanks(WinningLotto winningLotto, List<Lotto> targetLotteries) {
+        return targetLotteries.stream()
+                .map(lotto -> findRank(winningLotto, lotto))
+                .collect(Collectors.toList());
+    }
+
     public static Rank findRank(WinningLotto winningLotto, Lotto targetLotto) {
         int matchedCount = winningLotto.findMatchedCount(targetLotto);
 
@@ -33,5 +40,13 @@ public enum Rank {
         return ranks.stream()
                 .mapToInt(rank -> rank.winnings)
                 .sum();
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getWinnings() {
+        return winnings;
     }
 }
