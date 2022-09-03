@@ -2,23 +2,27 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public enum Rank {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    LOSER(0, 0)
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    LOSER(0, 0, false)
     ;
 
     private final int matchCount;
     private final int winnings;
+    private final boolean isBonus;
 
-    Rank(int matchCount, int winnings) {
+    Rank(int matchCount, int winnings, boolean isBonus) {
         this.matchCount = matchCount;
         this.winnings = winnings;
+        this.isBonus = isBonus;
     }
 
     public static List<Rank> calculateRanks(WinningLotto winningLotto, List<Lotto> targetLotteries) {
@@ -34,6 +38,20 @@ public enum Rank {
                 .filter(rank -> rank.matchCount == matchedCount)
                 .findFirst()
                 .orElse(LOSER);
+    }
+
+    public static Rank findRank(WinningLotto winningLotto, Lotto targetLotto, int bonusNumber) {
+        int matchedCount = winningLotto.findMatchedCount(targetLotto);
+
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == matchedCount)
+                .filter(matchBonusNumber(targetLotto, bonusNumber))
+                .findFirst()
+                .orElse(LOSER);
+    }
+
+    private static Predicate<Rank> matchBonusNumber(Lotto targetLotto, int bonusNumber) {
+        return rank -> rank.isBonus == targetLotto.isMatchedBonusNumber(rank.matchCount, bonusNumber);
     }
 
     public static int totalWinnings(List<Rank> ranks) {

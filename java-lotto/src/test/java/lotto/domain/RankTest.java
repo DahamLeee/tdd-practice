@@ -15,8 +15,9 @@ class RankTest {
     @MethodSource("lottoSet")
     void findRank(Lotto lotto, Rank expectedRank) {
         WinningLotto winningLotto = WinningLotto.from(List.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 7;
 
-        Rank rank = Rank.findRank(winningLotto, lotto);
+        Rank rank = Rank.findRank(winningLotto, lotto, bonusNumber);
         assertThat(rank).isEqualTo(expectedRank);
     }
 
@@ -24,8 +25,9 @@ class RankTest {
         return Stream.of(
                 Arguments.of(Lotto.from(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
                 Arguments.of(Lotto.from(List.of(2, 3, 4, 5, 6, 7)), Rank.SECOND),
-                Arguments.of(Lotto.from(List.of(3, 4, 5, 6, 7, 8)), Rank.THIRD),
-                Arguments.of(Lotto.from(List.of(4, 5, 6, 7, 8, 9)), Rank.FOURTH),
+                Arguments.of(Lotto.from(List.of(2, 3, 4, 5, 6, 8)), Rank.THIRD),
+                Arguments.of(Lotto.from(List.of(3, 4, 5, 6, 7, 8)), Rank.FOURTH),
+                Arguments.of(Lotto.from(List.of(4, 5, 6, 7, 8, 8)), Rank.FIFTH),
                 Arguments.of(Lotto.from(List.of(5, 6, 7, 8, 9, 10)), Rank.LOSER)
         );
     }
