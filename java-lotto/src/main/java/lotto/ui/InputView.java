@@ -36,6 +36,11 @@ public class InputView {
                 .collect(toList());
     }
 
+    public int bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scannerInt();
+    }
+
     private String scannerString() {
         return scanner.nextLine();
     }
@@ -43,5 +48,4 @@ public class InputView {
     private int scannerInt() {
         return scanner.nextInt();
     }
-
 }

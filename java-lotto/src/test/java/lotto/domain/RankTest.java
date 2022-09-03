@@ -17,8 +17,8 @@ class RankTest {
         WinningLotto winningLotto = WinningLotto.from(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
 
-        Rank rank = Rank.findRank(winningLotto, lotto, bonusNumber);
-        assertThat(rank).isEqualTo(expectedRank);
+        List<Rank> rank = Rank.calculateRanks(winningLotto, List.of(lotto), bonusNumber);
+        assertThat(rank.get(0)).isEqualTo(expectedRank);
     }
 
     private static Stream<Arguments> lottoSet() {

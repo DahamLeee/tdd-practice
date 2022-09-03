@@ -23,7 +23,7 @@ public class LottoService {
     public WinningLottoResponse calculateStatistics(WinningLottoRequest winningLottoRequest) {
         WinningLotto winningLotto = WinningLotto.from(winningLottoRequest.getWinningLotteries());
 
-        List<Rank> ranks = Rank.calculateRanks(winningLotto, winningLottoRequest.getMyLotteries());
+        List<Rank> ranks = Rank.calculateRanks(winningLotto, winningLottoRequest.getMyLotteries(), winningLottoRequest.getBonusNumber());
         double earningRatio = StatisticsCalculator.calculateEarningRatio(winningLottoRequest.getPurchasePrice(), ranks);
 
         return WinningLottoResponse.of(ranks, earningRatio);

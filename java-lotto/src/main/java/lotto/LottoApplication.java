@@ -33,8 +33,9 @@ public class LottoApplication {
 
     private static WinningLottoResponse requestWinningLottoAPI(List<Lotto> myLotteries, int purchasePrice) {
         List<Integer> winningLotto = inputView.winningLottoRequest();
+        int bonusNumber = inputView.bonusNumber();
 
-        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(winningLotto, myLotteries, purchasePrice);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(winningLotto, myLotteries, purchasePrice, bonusNumber);
 
         return lottoService.calculateStatistics(winningLottoRequest);
     }
