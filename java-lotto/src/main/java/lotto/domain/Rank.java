@@ -58,4 +58,8 @@ public enum Rank {
     public int getWinnings() {
         return winnings;
     }
+
+    public boolean isBonus() {
+        return isBonus;
+    }
 }

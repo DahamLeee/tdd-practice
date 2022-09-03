@@ -30,6 +30,10 @@ public class ResultView {
     }
 
     private void printMatchedRankCount(Rank rank, int matchedCount) {
+        if (rank.isBonus()) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", rank.getMatchCount(), rank.getWinnings(), matchedCount);
+            return;
+        }
         System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getMatchCount(), rank.getWinnings(), matchedCount);
     }
 }
