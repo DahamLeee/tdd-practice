@@ -1,6 +1,7 @@
 package lotto.util;
 
 import lotto.domain.Lotto;
+import lotto.domain.PurchasePrice;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,7 +14,7 @@ class AutoLottoGeneratorTest {
     @Test
     void autoLottoGeneratorTest() {
         AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
-        List<Lotto> lotteries = autoLottoGenerator.issueLotto(3_000);
+        List<Lotto> lotteries = autoLottoGenerator.issueLotto(PurchasePrice.from(3_000));
 
         assertAll(
                 () -> assertThat(lotteries).hasSize(3),

@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 
 import java.util.List;
@@ -8,11 +9,10 @@ public class StatisticsCalculator {
 
     private StatisticsCalculator() { }
 
-    public static double calculateEarningRatio(int purchasePrice, List<Rank> ranks) {
-        validatePurchasePrice(purchasePrice);
+    public static double calculateEarningRatio(PurchasePrice purchasePrice, List<Rank> ranks) {
         int totalWinnings = Rank.totalWinnings(ranks);
 
-        double rate = (double) totalWinnings / purchasePrice;
+        double rate = (double) totalWinnings / purchasePrice.purchasePrice();
         return Math.floor(rate * 100) / 100;
     }
 

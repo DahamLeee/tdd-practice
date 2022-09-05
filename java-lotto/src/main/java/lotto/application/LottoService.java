@@ -6,6 +6,7 @@ import lotto.application.dto.WinningLottoRequest;
 import lotto.application.dto.WinningLottoResponse;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.PurchasePrice;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.util.AutoLottoGenerator;
@@ -17,17 +18,19 @@ import java.util.stream.Collectors;
 public class LottoService {
 
     public LottoIssueResponse createLotto(LottoIssueRequest lottoIssueRequest) {
+        PurchasePrice purchasePrice = PurchasePrice.from(lottoIssueRequest.getPurchasePrice());
         AutoLottoGenerator lottoGenerator = new AutoLottoGenerator();
-        List<Lotto> lotteries = lottoGenerator.issueLotto(lottoIssueRequest.getPurchasePrice());
+        List<Lotto> lotteries = lottoGenerator.issueLotto(purchasePrice);
         return LottoIssueResponse.createResponse(lotteries, lottoIssueRequest.getPurchasePrice());
     }
 
     public WinningLottoResponse calculateStatistics(WinningLottoRequest winningLottoRequest) {
         LottoNumber bonusNumber = LottoNumber.from(winningLottoRequest.getBonusNumber());
         WinningLotto winningLotto = WinningLotto.from(createLottoNumbers(winningLottoRequest.winningLotto()));
+        PurchasePrice purchasePrice = PurchasePrice.from(winningLottoRequest.getPurchasePrice());
 
         List<Rank> ranks = Rank.calculateRanks(winningLotto, winningLottoRequest.getMyLotteries(), bonusNumber);
-        double earningRatio = StatisticsCalculator.calculateEarningRatio(winningLottoRequest.getPurchasePrice(), ranks);
+        double earningRatio = StatisticsCalculator.calculateEarningRatio(purchasePrice, ranks);
 
         return WinningLottoResponse.of(ranks, earningRatio);
     }
