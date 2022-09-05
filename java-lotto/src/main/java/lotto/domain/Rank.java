@@ -25,13 +25,13 @@ public enum Rank {
         this.isBonus = isBonus;
     }
 
-    public static List<Rank> calculateRanks(WinningLotto winningLotto, List<Lotto> targetLotteries, int bonusNumber) {
+    public static List<Rank> calculateRanks(WinningLotto winningLotto, List<Lotto> targetLotteries, LottoNumber bonusNumber) {
         return targetLotteries.stream()
                 .map(lotto -> findRank(winningLotto, lotto, bonusNumber))
                 .collect(Collectors.toList());
     }
 
-    private static Rank findRank(WinningLotto winningLotto, Lotto targetLotto, int bonusNumber) {
+    private static Rank findRank(WinningLotto winningLotto, Lotto targetLotto, LottoNumber bonusNumber) {
         int matchedCount = winningLotto.findMatchedCount(targetLotto);
 
         return Arrays.stream(Rank.values())
@@ -41,7 +41,7 @@ public enum Rank {
                 .orElse(LOSER);
     }
 
-    private static Predicate<Rank> matchBonusNumber(Lotto targetLotto, int bonusNumber) {
+    private static Predicate<Rank> matchBonusNumber(Lotto targetLotto, LottoNumber bonusNumber) {
         return rank -> rank.isBonus == targetLotto.isMatchedBonusNumber(rank.matchCount, bonusNumber);
     }
 

@@ -18,7 +18,7 @@ class AutoLottoGeneratorTest {
         assertAll(
                 () -> assertThat(lotteries).hasSize(3),
                 () -> lotteries.forEach(lotto ->
-                        assertThat(lotto.getLotto()).isSorted().hasSize(6))
+                        assertThat(lotto.getLotto()).hasSize(6))
         );
     }
 }

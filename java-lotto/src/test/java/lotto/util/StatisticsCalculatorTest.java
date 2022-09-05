@@ -14,7 +14,7 @@ class StatisticsCalculatorTest {
     @Test
     @DisplayName("로또 구매에 대한 수익률 구하기")
     void calculateEarningRatioTest() {
-        double earningRatio = StatisticsCalculator.calculateEarningRatio(14_000, List.of(Rank.FOURTH));
+        double earningRatio = StatisticsCalculator.calculateEarningRatio(14_000, List.of(Rank.FIFTH));
         assertThat(earningRatio).isEqualTo(0.35);
     }
 

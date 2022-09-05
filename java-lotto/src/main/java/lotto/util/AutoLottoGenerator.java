@@ -1,6 +1,7 @@
 package lotto.util;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +48,7 @@ public class AutoLottoGenerator {
                 .subList(0, 6)
                 .stream()
                 .sorted()
+                .map(LottoNumber::from)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::from));
     }
 

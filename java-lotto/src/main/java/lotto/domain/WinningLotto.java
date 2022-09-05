@@ -5,13 +5,13 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private final List<Integer> winningLotteries = new ArrayList<>();
+    private final List<LottoNumber> winningLotteries = new ArrayList<>();
 
-    private WinningLotto(List<Integer> winningLotteries) {
+    private WinningLotto(List<LottoNumber> winningLotteries) {
         this.winningLotteries.addAll(winningLotteries);
     }
 
-    public static WinningLotto from(List<Integer> winningLotto) {
+    public static WinningLotto from(List<LottoNumber> winningLotto) {
         return new WinningLotto(winningLotto);
     }
 
