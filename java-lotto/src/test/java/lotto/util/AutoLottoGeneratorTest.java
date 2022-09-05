@@ -13,8 +13,7 @@ class AutoLottoGeneratorTest {
 
     @Test
     void autoLottoGeneratorTest() {
-        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
-        List<Lotto> lotteries = autoLottoGenerator.issueLotto(PurchasePrice.from(3_000));
+        List<Lotto> lotteries = AutoLottoGenerator.issueLotto(PurchasePrice.from(3_000));
 
         assertAll(
                 () -> assertThat(lotteries).hasSize(3),

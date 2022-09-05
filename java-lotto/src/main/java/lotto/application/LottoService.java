@@ -19,8 +19,7 @@ public class LottoService {
 
     public LottoIssueResponse createLotto(LottoIssueRequest lottoIssueRequest) {
         PurchasePrice purchasePrice = PurchasePrice.from(lottoIssueRequest.getPurchasePrice());
-        AutoLottoGenerator lottoGenerator = new AutoLottoGenerator();
-        List<Lotto> lotteries = lottoGenerator.issueLotto(purchasePrice);
+        List<Lotto> lotteries = AutoLottoGenerator.issueLotto(purchasePrice);
         return LottoIssueResponse.createResponse(lotteries, lottoIssueRequest.getPurchasePrice());
     }
 

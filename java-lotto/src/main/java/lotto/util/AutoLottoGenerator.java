@@ -15,13 +15,14 @@ public class AutoLottoGenerator {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final List<Integer> LOTTO_NUMBER_SET = new ArrayList<>();
 
-    public AutoLottoGenerator() {
+    static {
         for (int number = MIN_LOTTO_NUMBER; number <= MAX_LOTTO_NUMBER; number++) {
             LOTTO_NUMBER_SET.add(number);
         }
     }
+    private AutoLottoGenerator() { }
 
-    public List<Lotto> issueLotto(PurchasePrice purchasePrice) {
+    public static List<Lotto> issueLotto(PurchasePrice purchasePrice) {
         int lottoCount = purchasePrice.lottoCount();
 
         List<Lotto> lotteries = new ArrayList<>();
@@ -35,7 +36,7 @@ public class AutoLottoGenerator {
         return lotteries;
     }
 
-    private Lotto generateLotto() {
+    private static Lotto generateLotto() {
         return LOTTO_NUMBER_SET
                 .subList(0, 6)
                 .stream()
