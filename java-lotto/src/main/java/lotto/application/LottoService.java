@@ -19,8 +19,9 @@ public class LottoService {
 
     public LottoIssueResponse createLotto(LottoIssueRequest lottoIssueRequest) {
         PurchasePrice purchasePrice = PurchasePrice.from(lottoIssueRequest.getPurchasePrice());
-        List<Lotto> lotteries = AutoLottoGenerator.issueLotto(purchasePrice);
-        return LottoIssueResponse.createResponse(lotteries, lottoIssueRequest.getPurchasePrice());
+        List<Lotto> manualLotteries = lottoIssueRequest.toLotto();
+        List<Lotto> lotteries = AutoLottoGenerator.issueLotto(purchasePrice, manualLotteries.size());
+        return LottoIssueResponse.createResponse(lotteries, manualLotteries, lottoIssueRequest.getPurchasePrice());
     }
 
     public WinningLottoResponse calculateStatistics(WinningLottoRequest winningLottoRequest) {
@@ -28,7 +29,7 @@ public class LottoService {
         WinningLotto winningLotto = WinningLotto.from(createLottoNumbers(winningLottoRequest.winningLotto()));
         PurchasePrice purchasePrice = PurchasePrice.from(winningLottoRequest.getPurchasePrice());
 
-        List<Rank> ranks = Rank.calculateRanks(winningLotto, winningLottoRequest.getMyLotteries(), bonusNumber);
+        List<Rank> ranks = Rank.calculateRanks(winningLotto, winningLottoRequest.getAutoLotteries(), winningLottoRequest.getManualLotteries(), bonusNumber);
         double earningRatio = StatisticsCalculator.calculateEarningRatio(purchasePrice, ranks);
 
         return WinningLottoResponse.of(ranks, earningRatio);

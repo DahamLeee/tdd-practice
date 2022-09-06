@@ -11,10 +11,19 @@ import java.util.List;
 public class ResultView {
 
     public void printLotteries(LottoIssueResponse lottoIssueResponse) {
-        List<Lotto> lotteries = lottoIssueResponse.getLotteries();
-        System.out.println(lotteries.size() + "개를 구매했습니다.");
-        lotteries.forEach(lotto -> {
-            System.out.println(lotto.getLotto());
+        List<Lotto> autoLotteries = lottoIssueResponse.getAutoLotteries();
+        List<Lotto> manualLotteries = lottoIssueResponse.getManualLotteries();
+
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLotteries.size(), autoLotteries.size());
+
+        manualLotteries.forEach(lotto -> {
+            lotto.getLotto().forEach(lottoNumber -> System.out.print(String.format("%d ", lottoNumber.lottoNumber())));
+            System.out.println();
+        });
+
+        autoLotteries.forEach(lotto -> {
+            lotto.getLotto().forEach(lottoNumber -> System.out.print(String.format("%d ", lottoNumber.lottoNumber())));
+            System.out.println();
         });
     }
 

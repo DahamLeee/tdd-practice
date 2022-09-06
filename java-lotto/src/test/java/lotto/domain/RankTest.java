@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +20,7 @@ class RankTest {
         WinningLotto winningLotto = WinningLotto.from(createLottoNumbers(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.from(7);
 
-        List<Rank> rank = Rank.calculateRanks(winningLotto, List.of(lotto), bonusNumber);
+        List<Rank> rank = Rank.calculateRanks(winningLotto, List.of(lotto), Collections.emptyList(), bonusNumber);
         assertThat(rank.get(0)).isEqualTo(expectedRank);
     }
 

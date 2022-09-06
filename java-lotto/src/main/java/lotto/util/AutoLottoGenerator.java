@@ -22,8 +22,8 @@ public class AutoLottoGenerator {
     }
     private AutoLottoGenerator() { }
 
-    public static List<Lotto> issueLotto(PurchasePrice purchasePrice) {
-        int lottoCount = purchasePrice.lottoCount();
+    public static List<Lotto> issueLotto(PurchasePrice purchasePrice, int manualLottoCount) {
+        int lottoCount = purchasePrice.lottoCount() - manualLottoCount;
 
         List<Lotto> lotteries = new ArrayList<>();
 

@@ -21,7 +21,7 @@ public class LottoApplication {
         LottoIssueResponse lottoIssueResponse = requestCreateLottoAPI();
         resultView.printLotteries(lottoIssueResponse);
 
-        WinningLottoResponse winningLottoResponse = requestWinningLottoAPI(lottoIssueResponse.getLotteries(), lottoIssueResponse.getPurchasePrice());
+        WinningLottoResponse winningLottoResponse = requestWinningLottoAPI(lottoIssueResponse.getAutoLotteries(), lottoIssueResponse.getManualLotteries(), lottoIssueResponse.getPurchasePrice());
         resultView.printStatistics(winningLottoResponse);
     }
 
@@ -31,11 +31,11 @@ public class LottoApplication {
         return lottoService.createLotto(lottoIssueRequest);
     }
 
-    private static WinningLottoResponse requestWinningLottoAPI(List<Lotto> myLotteries, int purchasePrice) {
+    private static WinningLottoResponse requestWinningLottoAPI(List<Lotto> autoLotteries, List<Lotto> manualLotteries, int purchasePrice) {
         List<Integer> winningLotto = inputView.winningLottoRequest();
         int bonusNumber = inputView.bonusNumber();
 
-        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(winningLotto, myLotteries, purchasePrice, bonusNumber);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(winningLotto, autoLotteries, manualLotteries, purchasePrice, bonusNumber);
 
         return lottoService.calculateStatistics(winningLottoRequest);
     }

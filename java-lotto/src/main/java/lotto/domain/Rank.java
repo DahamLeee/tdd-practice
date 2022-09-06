@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -25,7 +26,14 @@ public enum Rank {
         this.isBonus = isBonus;
     }
 
-    public static List<Rank> calculateRanks(WinningLotto winningLotto, List<Lotto> targetLotteries, LottoNumber bonusNumber) {
+    public static List<Rank> calculateRanks(WinningLotto winningLotto, List<Lotto> targetLotteries, List<Lotto> manualLotteries, LottoNumber bonusNumber) {
+        List<Rank> ranks = new ArrayList<>();
+        ranks.addAll(findLottoRanks(winningLotto, targetLotteries, bonusNumber));
+        ranks.addAll(findLottoRanks(winningLotto, manualLotteries, bonusNumber));
+        return ranks;
+    }
+
+    private static List<Rank> findLottoRanks(WinningLotto winningLotto, List<Lotto> targetLotteries, LottoNumber bonusNumber) {
         return targetLotteries.stream()
                 .map(lotto -> findRank(winningLotto, lotto, bonusNumber))
                 .collect(Collectors.toList());
