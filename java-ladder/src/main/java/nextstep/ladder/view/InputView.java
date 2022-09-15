@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String PLAYER_NAME_DIVIDER = ",";
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public InputView() {
         this.scanner = new Scanner(System.in);
