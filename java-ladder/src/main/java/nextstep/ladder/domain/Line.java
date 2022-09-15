@@ -2,6 +2,7 @@ package nextstep.ladder.domain;
 
 import nextstep.ladder.util.LineGenerator;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Line {
@@ -16,4 +17,7 @@ public class Line {
         return new Line(countOfPerson);
     }
 
+    public List<Point> getPoints() {
+        return Collections.unmodifiableList(points);
+    }
 }
