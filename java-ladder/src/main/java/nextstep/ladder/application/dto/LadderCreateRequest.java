@@ -1,6 +1,7 @@
 package nextstep.ladder.application.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LadderCreateRequest {
@@ -17,11 +18,11 @@ public class LadderCreateRequest {
         return new LadderCreateRequest(playerNames, ladderHeight);
     }
 
-    @Override
-    public String toString() {
-        return "LadderCreateRequest{" +
-                "playerNames=" + playerNames +
-                ", ladderHeight=" + ladderHeight +
-                '}';
+    public List<String> getPlayerNames() {
+        return Collections.unmodifiableList(playerNames);
+    }
+
+    public int getLadderHeight() {
+        return ladderHeight;
     }
 }
