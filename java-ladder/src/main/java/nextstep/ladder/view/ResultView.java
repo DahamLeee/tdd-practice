@@ -2,6 +2,7 @@ package nextstep.ladder.view;
 
 import nextstep.ladder.application.dto.LadderCreateResponse;
 import nextstep.ladder.application.dto.LadderDto;
+import nextstep.ladder.application.dto.LadderResultDto;
 
 import java.util.List;
 
@@ -15,10 +16,11 @@ public class ResultView {
         System.out.println("실행 결과");
         printPlayerName(createResponse.getPlayerNames());
         printLadders(createResponse.getLadderDto());
+        printLadderResult(createResponse.getLadderResultDto());
     }
 
     private void printPlayerName(List<String> playerNames) {
-        playerNames.forEach(playerName -> System.out.printf("%-5s", playerName));
+        playerNames.forEach(playerName -> System.out.printf("%-6s", playerName));
         System.out.println();
     }
 
@@ -31,8 +33,11 @@ public class ResultView {
                     });
                     ladderBuilder.append("\n");
                 });
+        System.out.print(ladderBuilder);
+    }
 
-        System.out.println(ladderBuilder);
+    private void printLadderResult(LadderResultDto ladderResultDto) {
+        ladderResultDto.getLadderResults().forEach(ladderResult -> System.out.printf("%-6s", ladderResult));
     }
 
     private String ladderToView(boolean movable) {

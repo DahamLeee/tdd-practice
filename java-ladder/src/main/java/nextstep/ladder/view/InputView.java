@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    private static final String PLAYER_NAME_DIVIDER = ",";
+    private static final String COMMA_REGEX = ",";
     private final Scanner scanner;
 
     public InputView() {
@@ -18,9 +18,10 @@ public class InputView {
 
     public LadderCreateRequest requestLadder() {
         List<String> playerNames = inputPlayerNames();
+        List<String> ladderResults = inputLadderResult();
         int ladderHeight = inputLadderHeight();
 
-        return LadderCreateRequest.of(playerNames, ladderHeight);
+        return LadderCreateRequest.of(playerNames, ladderResults, ladderHeight);
     }
 
     private List<String> inputPlayerNames() {
@@ -28,17 +29,30 @@ public class InputView {
 
         String playersNameWithComma = inputString();
 
-        return playersNameToList(playersNameWithComma);
+        return inputCommaToList(playersNameWithComma);
     }
 
-    private List<String> playersNameToList(String playersNameWithComma) {
-        return Arrays.stream(playersNameWithComma.split(PLAYER_NAME_DIVIDER))
+    private List<String> inputLadderResult() {
+        System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+
+        String ladderResultsWithComma = inputString();
+
+        return inputCommaToList(ladderResultsWithComma);
+    }
+
+    private List<String> inputCommaToList(String inputString) {
+        return Arrays.stream(inputString.split(COMMA_REGEX))
                 .collect(Collectors.toList());
     }
 
     private int inputLadderHeight() {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
         return inputInt();
+    }
+
+    public String requestLadderResult() {
+        System.out.println("결과를 보고 싶은 사람은?");
+        return inputString();
     }
 
     private String inputString() {
@@ -48,5 +62,4 @@ public class InputView {
     private int inputInt() {
         return scanner.nextInt();
     }
-
 }
