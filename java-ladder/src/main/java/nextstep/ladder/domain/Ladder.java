@@ -17,11 +17,27 @@ public class Ladder {
                 .collect(Collectors.toList());
     }
 
+    private Ladder(List<Line> ladder) {
+        this.ladder = ladder;
+    }
+
     public static Ladder of(int height, int countOfPerson) {
         return new Ladder(height, countOfPerson);
     }
 
+    public static Ladder of(List<Line> ladder) {
+        return new Ladder(ladder);
+    }
+
     public List<Line> getLadder() {
         return Collections.unmodifiableList(ladder);
+    }
+
+    public int climb(int column) {
+        for (Line line : ladder) {
+            column = line.goDown(column);
+        }
+
+        return column;
     }
 }
