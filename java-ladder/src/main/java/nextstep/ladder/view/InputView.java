@@ -1,6 +1,7 @@
 package nextstep.ladder.view;
 
 import nextstep.ladder.application.dto.LadderCreateRequest;
+import nextstep.ladder.application.dto.PlayerLadderResultResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,9 +56,9 @@ public class InputView {
         return inputString();
     }
 
-    public void printLadderResultView(String ladderResult) {
+    public void printLadderResultView(PlayerLadderResultResponse response) {
         System.out.println("실행 결과");
-        System.out.println(ladderResult);
+        System.out.println(response.getLadderResult());
     }
 
     private String inputString() {

@@ -2,6 +2,7 @@ package nextstep.ladder.application;
 
 import nextstep.ladder.application.dto.LadderCreateRequest;
 import nextstep.ladder.application.dto.LadderCreateResponse;
+import nextstep.ladder.application.dto.PlayerLadderResultResponse;
 import nextstep.ladder.domain.Ladder;
 import nextstep.ladder.domain.LadderGame;
 import nextstep.ladder.domain.LadderResult;
@@ -23,11 +24,12 @@ public class LadderService {
         return LadderCreateResponse.of(ladder, ladderResult, ladderCreateRequest.getPlayerNames());
     }
 
-    public void allLadderResult() { }
+    public void allLadderResult() {
 
-    public String ladderResultByPlayerName(String playerName) {
+    }
+
+    public PlayerLadderResultResponse ladderResultByPlayerName(String playerName) {
         Player findPlayer = players.findByPlayerName(playerName);
-
-        return ladderGame.ladderResultByStartColumn(findPlayer.startColumn());
+        return PlayerLadderResultResponse.of(ladderGame.ladderResultByPlayer(findPlayer));
     }
 }

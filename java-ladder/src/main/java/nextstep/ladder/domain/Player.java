@@ -21,4 +21,8 @@ public class Player {
     public int startColumn() {
         return startColumn;
     }
+
+    public String playerName() {
+        return name;
+    }
 }

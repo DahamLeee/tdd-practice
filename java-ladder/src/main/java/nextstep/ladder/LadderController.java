@@ -3,6 +3,7 @@ package nextstep.ladder;
 import nextstep.ladder.application.LadderService;
 import nextstep.ladder.application.dto.LadderCreateRequest;
 import nextstep.ladder.application.dto.LadderCreateResponse;
+import nextstep.ladder.application.dto.PlayerLadderResultResponse;
 import nextstep.ladder.view.InputView;
 import nextstep.ladder.view.ResultView;
 
@@ -28,7 +29,7 @@ public class LadderController {
                 break;
             }
 
-            String ladderResult = ladderService.ladderResultByPlayerName(playerName);
+            PlayerLadderResultResponse ladderResult = ladderService.ladderResultByPlayerName(playerName);
             inputView.printLadderResultView(ladderResult);
         }
     }
