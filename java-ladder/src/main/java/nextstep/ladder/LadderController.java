@@ -15,6 +15,22 @@ public class LadderController {
     public static void main(String[] args) {
         LadderCreateResponse ladderCreateResponse = requestCreateLadderAPI();
         resultView.printLadderResponseView(ladderCreateResponse);
+
+        requestLadderResultAPI();
+    }
+
+    private static void requestLadderResultAPI() {
+        while (true) {
+            String playerName = inputView.playerNameForLadderResult();
+
+            if (playerName.equals("all")) {
+                ladderService.allLadderResult();
+                break;
+            }
+
+            String ladderResult = ladderService.ladderResultByPlayerName(playerName);
+            inputView.printLadderResultView(ladderResult);
+        }
     }
 
     private static LadderCreateResponse requestCreateLadderAPI() {

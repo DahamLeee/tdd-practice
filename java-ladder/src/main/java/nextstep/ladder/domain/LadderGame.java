@@ -13,4 +13,9 @@ public class LadderGame {
     public static LadderGame of(Ladder ladder, LadderResult ladderResult) {
         return new LadderGame(ladder, ladderResult);
     }
+
+    public String ladderResultByStartColumn(int startColumn) {
+        int endColumn = ladder.climb(startColumn);
+        return ladderResult.ladderResultByEndColumn(endColumn);
+    }
 }

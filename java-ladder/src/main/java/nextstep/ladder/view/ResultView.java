@@ -37,7 +37,9 @@ public class ResultView {
     }
 
     private void printLadderResult(LadderResultDto ladderResultDto) {
-        ladderResultDto.getLadderResults().forEach(ladderResult -> System.out.printf("%-6s", ladderResult));
+        ladderResultDto.getLadderResults()
+                .forEach(ladderResult -> System.out.printf("%-6s", ladderResult));
+        System.out.println();
     }
 
     private String ladderToView(boolean movable) {

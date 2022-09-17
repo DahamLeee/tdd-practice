@@ -5,6 +5,7 @@ import nextstep.ladder.application.dto.LadderCreateResponse;
 import nextstep.ladder.domain.Ladder;
 import nextstep.ladder.domain.LadderGame;
 import nextstep.ladder.domain.LadderResult;
+import nextstep.ladder.domain.Player;
 import nextstep.ladder.domain.Players;
 
 public class LadderService {
@@ -20,5 +21,13 @@ public class LadderService {
         ladderGame = LadderGame.of(ladder, ladderResult);
 
         return LadderCreateResponse.of(ladder, ladderResult, ladderCreateRequest.getPlayerNames());
+    }
+
+    public void allLadderResult() { }
+
+    public String ladderResultByPlayerName(String playerName) {
+        Player findPlayer = players.findByPlayerName(playerName);
+
+        return ladderGame.ladderResultByStartColumn(findPlayer.startColumn());
     }
 }

@@ -50,9 +50,14 @@ public class InputView {
         return inputInt();
     }
 
-    public String requestLadderResult() {
+    public String playerNameForLadderResult() {
         System.out.println("결과를 보고 싶은 사람은?");
         return inputString();
+    }
+
+    public void printLadderResultView(String ladderResult) {
+        System.out.println("실행 결과");
+        System.out.println(ladderResult);
     }
 
     private String inputString() {
