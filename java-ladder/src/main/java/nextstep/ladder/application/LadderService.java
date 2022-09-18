@@ -7,7 +7,11 @@ import nextstep.ladder.domain.Ladder;
 import nextstep.ladder.domain.LadderGame;
 import nextstep.ladder.domain.LadderResult;
 import nextstep.ladder.domain.Player;
+import nextstep.ladder.domain.PlayerLadderResult;
 import nextstep.ladder.domain.Players;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LadderService {
 
@@ -24,8 +28,12 @@ public class LadderService {
         return LadderCreateResponse.of(ladder, ladderResult, ladderCreateRequest.getPlayerNames());
     }
 
-    public void allLadderResult() {
+    public List<PlayerLadderResultResponse> allLadderResult() {
+        List<PlayerLadderResult> results = ladderGame.allLadderResult(players);
 
+        return results.stream()
+                .map(PlayerLadderResultResponse::of)
+                .collect(Collectors.toList());
     }
 
     public PlayerLadderResultResponse ladderResultByPlayerName(String playerName) {

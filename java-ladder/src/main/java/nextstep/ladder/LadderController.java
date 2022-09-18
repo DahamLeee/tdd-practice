@@ -7,6 +7,8 @@ import nextstep.ladder.application.dto.PlayerLadderResultResponse;
 import nextstep.ladder.view.InputView;
 import nextstep.ladder.view.ResultView;
 
+import java.util.List;
+
 public class LadderController {
 
     private static final InputView inputView = new InputView();
@@ -25,7 +27,8 @@ public class LadderController {
             String playerName = inputView.playerNameForLadderResult();
 
             if (playerName.equals("all")) {
-                ladderService.allLadderResult();
+                List<PlayerLadderResultResponse> ladderResults = ladderService.allLadderResult();
+                inputView.printAllLadderResultView(ladderResults);
                 break;
             }
 

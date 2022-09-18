@@ -1,5 +1,8 @@
 package nextstep.ladder.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LadderGame {
 
     private final Ladder ladder;
@@ -17,5 +20,11 @@ public class LadderGame {
     public PlayerLadderResult ladderResultByPlayer(Player player) {
         int endColumn = ladder.climb(player.startColumn());
         return PlayerLadderResult.of(player.playerName(), ladderResult.ladderResultByEndColumn(endColumn));
+    }
+
+    public List<PlayerLadderResult> allLadderResult(Players players) {
+        return players.allPlayer().stream()
+                .map(player -> PlayerLadderResult.of(player.playerName(), ladderResult.ladderResultByEndColumn(ladder.climb(player.startColumn()))))
+                .collect(Collectors.toList());
     }
 }

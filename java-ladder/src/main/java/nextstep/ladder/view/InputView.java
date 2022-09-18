@@ -61,6 +61,13 @@ public class InputView {
         System.out.println(response.getLadderResult());
     }
 
+    public void printAllLadderResultView(List<PlayerLadderResultResponse> ladderResults) {
+        System.out.println("실행 결과");
+        ladderResults.forEach(ladderResult -> {
+            System.out.println(ladderResult.getPlayerName() + " : " + ladderResult.getLadderResult());
+        });
+    }
+
     private String inputString() {
         return scanner.next();
     }

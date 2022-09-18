@@ -1,6 +1,7 @@
 package nextstep.ladder.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Players {
@@ -26,5 +27,9 @@ public class Players {
                 .filter(player -> player.equalPlayerName(playerName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("사다리 게임에 참가하지 않은 사용자 입니다. * 입력된 이름 : %s", playerName)));
+    }
+
+    public List<Player> allPlayer() {
+        return Collections.unmodifiableList(players);
     }
 }
