@@ -1,5 +1,6 @@
 package qna.domain;
 
+import qna.CannotDeleteException;
 import qna.UnAuthorizedException;
 
 import javax.persistence.Column;
@@ -40,36 +41,16 @@ public class User extends AbstractEntity {
         return userId;
     }
 
-    public User setUserId(String userId) {
-        this.userId = userId;
-        return this;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public User setName(String name) {
-        this.name = name;
-        return this;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public User setEmail(String email) {
-        this.email = email;
-        return this;
     }
 
     public void update(User loginUser, User target) {
@@ -104,6 +85,12 @@ public class User extends AbstractEntity {
 
     public boolean isGuestUser() {
         return false;
+    }
+
+    public void validateQuestionOwner(User loginUser) throws CannotDeleteException {
+        if (!this.equals(loginUser)) {
+            throw new CannotDeleteException("질문을 삭제할 권한이 없습니다.");
+        }
     }
 
     private static class GuestUser extends User {
