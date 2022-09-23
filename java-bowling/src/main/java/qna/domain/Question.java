@@ -38,21 +38,17 @@ public class Question extends AbstractEntity {
         this.contents = contents;
     }
 
-    public List<DeleteHistory> deleteHistory(User loginUser) throws CannotDeleteException {
-        writer.validateQuestionOwner(loginUser);
-        answers.validateAnswerOwner(loginUser);
-
-        return deleteHistories();
-    }
-
-    private List<DeleteHistory> deleteHistories() {
+    public List<DeleteHistory> deleteQuestionAndAnswer(User loginUser) throws CannotDeleteException {
         List<DeleteHistory> deleteHistories = new ArrayList<>();
-        deleteHistories.add(deleteQuestion());
-        deleteHistories.addAll(answers.deleteAnswers());
+
+        deleteHistories.add(deleteQuestion(loginUser));
+        deleteHistories.addAll(answers.deleteAnswers(loginUser));
+
         return deleteHistories;
     }
 
-    private DeleteHistory deleteQuestion() {
+    private DeleteHistory deleteQuestion(User loginUser) throws CannotDeleteException {
+        writer.validateQuestionOwner(loginUser);
         softDeleteQuestion();
         return new DeleteHistory(ContentType.QUESTION, getId(), this.writer, LocalDateTime.now());
     }

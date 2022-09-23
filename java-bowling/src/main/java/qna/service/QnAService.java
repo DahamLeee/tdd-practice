@@ -33,6 +33,6 @@ public class QnAService {
     public void deleteQuestion(User loginUser, long questionId) throws CannotDeleteException {
         Question question = findQuestionById(questionId);
 
-        deleteHistoryService.saveAll(question.deleteHistory(loginUser));
+        deleteHistoryService.saveAll(question.deleteQuestionAndAnswer(loginUser));
     }
 }
